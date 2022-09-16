@@ -1,5 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 from AppRegistro.forms import UserRegisterForm
+
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LogoutView
+
+from django.urls import reverse_lazy
 
 # Registro Usuario
 
@@ -20,3 +27,29 @@ def register(request):
     }
 
     return render(request, "AppRegistro/registro.html", context=context)
+
+# Login 
+def login_request(request):
+    next_url = request.GET.get('next')
+    if request.method == "POST":
+        form = AuthenticationForm(request, data = request.POST)
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
+            user = authenticate(username=usuario, password=contra)
+            if user:
+                login(request=request, user=user)
+                if next_url:
+                    return redirect(next_url)
+                return render(request, "AppTienda/home.html", {"mensaje":f"Bienvenido {usuario}"})
+            else:
+                return render(request,"AppTienda/home.html", {"mensaje":"Error, datos incorrectos"})
+        else:
+            return render(request,"AppTienda/home.html", {"mensaje":"Error, formulario erroneo"})
+
+    form = AuthenticationForm()
+    return render(request,"AppRegistro/login.html", {'form':form} )
+
+class CustomLogoutView(LogoutView):
+    template_name = 'AppRegistro/logout.html'
+    next_page = reverse_lazy('inicio')

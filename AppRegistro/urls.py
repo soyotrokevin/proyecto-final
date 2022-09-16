@@ -1,6 +1,9 @@
 from django.urls import path
-from AppRegistro import views
+from AppRegistro import views 
 
 urlpatterns = [
     path('register/', views.register, name = 'register'),
+    path('login/', views.login_request, name = 'login'),
+    path('logout/', views.CustomLogoutView.as_view(), name = 'logout'),
+
 ]

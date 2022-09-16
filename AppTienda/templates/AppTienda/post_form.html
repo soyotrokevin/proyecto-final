@@ -1,26 +1,24 @@
 {% extends "AppTienda/base.html" %}
 
-
-{% block contenido_base %}
         <!-- Page Header-->
         <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
           <div class="container position-relative px-4 px-lg-5">
               <div class="row gx-4 gx-lg-5 justify-content-center">
                   <div class="col-md-10 col-lg-8 col-xl-7">
                       <div class="site-heading">
-                        <h2>Crear usuario</h2>
-                        
+                          <h1>Clean Blog</h1>
+                          <span class="subheading">A Blog Theme by Start Bootstrap</span>
                       </div>
                   </div>
-                  <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <input type="submit" value="Crear usuario" />
-                  </form>
               </div>
           </div>
       </header>
 
-    
+{% block contenido_base %}
 
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Enviar" />
+</form>
 {% endblock contenido_base %}
