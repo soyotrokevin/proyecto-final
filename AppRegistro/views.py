@@ -4,7 +4,14 @@ from AppRegistro.forms import UserRegisterForm
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+
 from django.contrib.auth.views import LogoutView
+
+from django.contrib.auth.models import User
+from AppRegistro.forms import  UserRegisterForm, UserUpdateForm
 
 from django.urls import reverse_lazy
 
@@ -49,6 +56,16 @@ def login_request(request):
 
     form = AuthenticationForm()
     return render(request,"AppRegistro/login.html", {'form':form} )
+
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    success_url = reverse_lazy('inicio')
+    template_name = 'AppRegistro/perfil.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 class CustomLogoutView(LogoutView):
     template_name = 'AppRegistro/logout.html'

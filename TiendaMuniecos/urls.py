@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('tienda-muniecos/', include('AppTienda.urls')),
     path('accounts/', include('AppRegistro.urls')),
+    path('captcha/',include("captcha.urls"))
+
 
 ]

@@ -15,6 +15,8 @@
                   <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    {{form.captcha}}
+
                     <input type="submit" value="Crear usuario" />
                   </form>
               </div>
@@ -22,5 +24,4 @@
       </header>
 
     
-
 {% endblock contenido_base %}
