@@ -15,17 +15,17 @@
             </div>
         </div>
     </header>
-    
-    {% for post in posts %}
-    
-      <h2>{{ post.title }}</h2>
-      
-    {% endfor %}
-    {{ posts.title }}
 
-    <br>
-    <h2> Prueba de que está funcionando esto</h2>
-    <br>
-
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h1>{{object.title }}</h1>
+                {{ object.content }}
+            </div>
+        </div>
+    </div>
+</article> 
 
 {% endblock contenido_base %}

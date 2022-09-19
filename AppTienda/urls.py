@@ -10,5 +10,6 @@ urlpatterns = [
     
     path('create/', PostCreateView.as_view(), name='posteo_nuevo'),
     path('pages/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    path('posts/', PostDetailView.as_view(), name='home'),
 
 ]

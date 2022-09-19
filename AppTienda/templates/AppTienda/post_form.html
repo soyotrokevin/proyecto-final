@@ -1,27 +1,27 @@
 {% extends "AppTienda/base.html" %}
 
 {% load static %}
-
-        <!-- Page Header-->
-    <header class="masthead" style="background-image: url('{% static 'AppTienda/assets/img/home-bg.jpg'%}')">
-        <div class="container position-relative px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-                    <div class="site-heading">
-                        <h2>Tienda de Muñecos</h2>
-                        <span class="subheading">Lugar de intercambio para coleccionistas</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-
 {% block contenido_base %}
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Enviar" />
-</form>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                          <h2>Nueva publicación</h2>
+                          
+                        </div>
+                    </div>
+                    <form method="post">
+                      {% csrf_token %}
+                      {{ form.as_p }}
+                      {{form.captcha}}
+  
+                      <input type="submit" value="Publicar" />
+                    </form>
+                </div>
+            </div>
+        </header>
+    
 {% endblock contenido_base %}

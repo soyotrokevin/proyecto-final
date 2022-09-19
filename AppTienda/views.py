@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 
+from ckeditor.fields import RichTextField
 
 def inicio(request):
     return render(request, "AppTienda/home.html")
@@ -22,7 +23,7 @@ class PostListView(ListView):
 
 class UserPostListView(ListView):
     model = Post
-    template_name = 'blog/user_posts.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'AppTienda/home.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'posts'
     paginate_by = 2
 
