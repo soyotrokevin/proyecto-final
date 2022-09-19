@@ -1,35 +1,31 @@
 {% extends "AppTienda/base.html" %}
-{%load static%}
 {% block contenido_base %}
-
+{% load static %}
 
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg' )">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Clean Blog</h1>
-                            <span class="subheading">A Blog Theme by Start Bootstrap</span>
-                        </div>
+    <header class="masthead" style="background-image: url('{% static 'AppTienda/assets/img/home-bg.jpg'%}')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h2>Tienda de Muñecos</h2>
+                        <span class="subheading">Lugar de intercambio para coleccionistas</span>
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
     
-        {% for post in posts %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
-              <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-            </div>
-            <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
-          </div>
-        </article>
-        {% endfor %}
+    {% for post in posts %}
+    
+      <h2>{{ post.title }}</h2>
+      
+    {% endfor %}
+    {{ posts.title }}
 
+    <br>
+    <h2> Prueba de que está funcionando esto</h2>
+    <br>
 
 
 {% endblock contenido_base %}

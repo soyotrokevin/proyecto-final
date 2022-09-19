@@ -13,9 +13,10 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'birth_date' ,'username', 'email', 'password1', 'password2']
 
+BIRTH_YEAR_CHOICES = ['1980', '1981', '1982']
 
 class UserUpdateForm(forms.ModelForm):
-    birth_date = forms.DateField(label='Fecha de nacimiento', widget=forms.SelectDateWidget)
+    birth_date = forms.DateField(label='Fecha de nacimiento', widget=forms.SelectDateWidget(years=BIRTH_YEAR_CHOICES))
     class Meta:
         model = User
         fields = ['first_name','last_name', 'birth_date' ,'email']
