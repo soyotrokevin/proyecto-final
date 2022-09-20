@@ -39,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'AppTienda',
     'AppRegistro',
-    'captcha',
     'ckeditor',
+    'ckeditor_uploader',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -127,4 +128,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media/'
+
 CKEDITOR_UPLOAD_PATH = 'uploads/'

@@ -4,10 +4,12 @@ from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 
-from ckeditor.fields import RichTextField
 
 def inicio(request):
-    return render(request, "AppTienda/home.html")
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, "AppTienda/home.html", context)
 
 def acerca_de(request):
     return render(request, "AppTienda/acerca_de_mi.html")
@@ -19,7 +21,6 @@ class PostListView(ListView):
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 2
-
 
 class UserPostListView(ListView):
     model = Post
@@ -35,7 +36,6 @@ class UserPostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
 
-
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
@@ -43,7 +43,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
@@ -58,7 +57,6 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == post.author:
             return True
         return False
-
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
