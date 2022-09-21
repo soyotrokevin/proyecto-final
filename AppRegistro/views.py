@@ -26,7 +26,7 @@ def register(request):
         if form.is_valid():
             human = True
             form.save()
-            return render(request, "AppTienda/inicio.html", {"mensaje": "Usuario Creado :)"})
+            return render(request, "{% url 'inicio' %}", {"mensaje": "Usuario Creado :)"})
         else:
             mensaje = 'Cometiste un error en el registro'
     formulario = UserRegisterForm()  # Formulario vacio para construir el html

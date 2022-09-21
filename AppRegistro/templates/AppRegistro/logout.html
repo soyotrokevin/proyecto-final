@@ -1,9 +1,11 @@
 {% extends "AppTienda/base.html" %}
 {% block content %}
+
     <h2>Sesión cerrada correctamente!</h2>
     <div class="border-top pt-3">
         <small class="text-muted">
             <a href="{% url 'login' %}">Volver a ininciar sesión</a>
         </small>
     </div>
+    
 {% endblock content %}

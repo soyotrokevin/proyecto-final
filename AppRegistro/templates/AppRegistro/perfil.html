@@ -25,12 +25,18 @@
             <p>Editar datos:</p>
             <form method="post">
               {% csrf_token %}
-              {{ form.as_p }}
-              <input type="submit" value="Guardar"/>
+              <fieldset class="form-group">
+                {{ form.as_p }}
+              </fieldset>
+              <div class="form-group">
+                  <button class="btn btn-outline-info" type="submit">Guardar
+                    
+                  </button>
             </form>
-            {% endblock contenido_base %}
-              
+          
           </div>
       </div>
   </div>
 </main>
+{% endblock contenido_base %}
+              
