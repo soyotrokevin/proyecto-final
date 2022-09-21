@@ -12,7 +12,7 @@ Referencia estructura del proyecto
 https://learndjango.com/tutorials/template-structure 
 
 Tutorial CKEditor
-https://www.youtube.com/watch?v=L6y6cn1XUfw
+https://www.youtube.com/watch?v=mF5jzSXb1dc
 
 Tutorial implementación CAPTCHA
 https://www.tutorialspoint.com/how-to-add-a-captcha-in-a-django-website

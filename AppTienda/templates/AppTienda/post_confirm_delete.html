@@ -1,0 +1,37 @@
+{% extends "AppTienda/base.html" %}
+
+{% load static %}
+{% block contenido_base %}
+  <!-- Page Header-->
+  <header class="masthead" style="background-image: url('{% static 'AppTienda/assets/img/home-bg.jpg'%}')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h2>Tienda de Muñecos</h2>
+                    <span class="subheading">Lugar de intercambio para coleccionistas</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>   
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <form method="post">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Borrar publicación</legend>
+                <h2>Está a punto de borrar: "{{ object.title }}" ¿Desea continuar?</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Confirmar</button>
+                <a class="btn btn-outline-secondary" href="{% url 'post-detail' object.id %}">Volver atrás</a>
+          </form>
+        
+        </div>
+    </div>
+</div>
+       
+    
+{% endblock contenido_base %}

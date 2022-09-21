@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'AppTienda',
     'AppRegistro',
     'ckeditor',
-    'ckeditor_uploader',
     'captcha',
 ]
 

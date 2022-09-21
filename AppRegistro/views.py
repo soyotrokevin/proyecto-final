@@ -1,18 +1,19 @@
 from django.shortcuts import render, redirect
 
-from AppRegistro.forms import UserRegisterForm
+from AppRegistro.forms import UserRegisterForm,  UserUpdateForm
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from django.contrib.auth.views import LogoutView
 
-from django.contrib.auth.models import User
-from AppRegistro.forms import  UserRegisterForm, UserUpdateForm
 
+from django.contrib import messages
 from django.urls import reverse_lazy
 
 # Registro Usuario
@@ -23,8 +24,9 @@ def register(request):
         form = UserRegisterForm(request.POST)
 
         if form.is_valid():
+            human = True
             form.save()
-            return render(request, "AppTienda/home.html", {"mensaje": "Usuario Creado :)"})
+            return render(request, "AppTienda/inicio.html", {"mensaje": "Usuario Creado :)"})
         else:
             mensaje = 'Cometiste un error en el registro'
     formulario = UserRegisterForm()  # Formulario vacio para construir el html
@@ -41,9 +43,11 @@ def login_request(request):
     if request.method == "POST":
         form = AuthenticationForm(request, data = request.POST)
         if form.is_valid():
+            
             usuario = form.cleaned_data.get('username')
             contra = form.cleaned_data.get('password')
             user = authenticate(username=usuario, password=contra)
+
             if user:
                 login(request=request, user=user)
                 if next_url:
@@ -53,6 +57,7 @@ def login_request(request):
                 return render(request,"AppTienda/home.html", {"mensaje":"Error, datos incorrectos"})
         else:
             return render(request,"AppTienda/home.html", {"mensaje":"Error, formulario erroneo"})
+            
 
     form = AuthenticationForm()
     return render(request,"AppRegistro/login.html", {'form':form} )
