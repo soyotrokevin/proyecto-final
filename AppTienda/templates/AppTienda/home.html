@@ -16,25 +16,28 @@
     </div>
 </header>   
 
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
 
-{% for post in posts %}
-    {% if post.lenght > 0 %}
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-
-            <h2>ÚLTIMAS PUBLICACIONES</h2>
-            
-            </div>
+        <h2>ÚLTIMAS PUBLICACIONES</h2>
+        
         </div>
     </div>
-    {% endif %}
+</div>
 
-    {% if post.lenght != 0 %}
+{% for post in posts %}
+    {% if post.len == 0 %}
+
+    <h2>No hay publicaciones aún</h2>
+   
+    {% else %}
+
         <!-- Post Content-->
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
+
                     <hr>
                     <article class="media content-section">
                         <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
@@ -45,16 +48,16 @@
                             </div>
                             <h4><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h4>
                             <p class="article-content">
-                                {{ post.content | safe}}
+                                {{ post.subtitle }}
                             </p>
                         </div>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-detail' post.id %}">Leer más</a>
                     </article>
                     </div>
                 </div>
             </div>
         </div>
-    {% else %}
-    <H3>No hay</H3>
+
 
     {% endif %}
 

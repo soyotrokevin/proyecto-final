@@ -8,6 +8,7 @@ from ckeditor.fields import RichTextField
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
+    subtitle = models.TextField(blank=True, null=True)
     content = RichTextField(blank=True, null=True)
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -17,3 +18,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', kwargs={'pk': self.pk})
+
+class Avatar(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    imagen = models.ImageField(upload_to='avatares', null=True, blank = True)
