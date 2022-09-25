@@ -7,14 +7,12 @@
               <div class="row gx-4 gx-lg-5 justify-content-center">
                   <div class="col-md-10 col-lg-8 col-xl-7">
                       <div class="site-heading">
-                        <h2>Crear usuario</h2>
-                        
+                          <h2>Crear usuario</h2>
                       </div>
                   </div>
-                
               </div>
           </div>
-      </header>
+        </header>    
 
             <!-- Main Content-->
             <main class="mb-4">
@@ -25,14 +23,11 @@
                           {% csrf_token %}
                           {{ form.as_p }}
                           <div class="form-group">
-                            <button class="btn btn-outline-info" type="submit">Confirmar
-                              
-                            </button>
+                            <button class="btn btn-outline-info" type="submit">Confirmar</button>
                         </form>
                       </div>
                   </div>
               </div>
           </main>
-
     
 {% endblock contenido_base %}

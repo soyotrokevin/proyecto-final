@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -24,7 +25,7 @@ class PostListView(ListView):
 
 class UserPostListView(ListView):
     model = Post
-    template_name = 'AppTienda/home.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'AppTienda/my_post.html'  # <app>/<model>_<viewtype>.html
     context_object_name = 'posts'
     paginate_by = 2
 
@@ -60,7 +61,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
-    success_url =  "{% url 'inicio' %}"
+    success_url =  reverse_lazy('inicio')
 
     def test_func(self):
         post = self.get_object()

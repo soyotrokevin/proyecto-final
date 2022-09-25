@@ -6,7 +6,6 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
@@ -26,10 +25,11 @@ def register(request):
         if form.is_valid():
             human = True
             form.save()
-            return render(request, "{% url 'inicio' %}", {"mensaje": "Usuario Creado :)"})
+            return render(request, "AppTienda/home.html", {"mensaje":"Usuario Creado"})
         else:
-            mensaje = 'Cometiste un error en el registro'
-    formulario = UserRegisterForm()  # Formulario vacio para construir el html
+            return render(request, "AppTienda/home.html", {"mensaje":"Error con el registro"})
+    
+    formulario = UserRegisterForm()  
     context = {
         'form': formulario,
         'mensaje': mensaje
