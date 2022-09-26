@@ -7,7 +7,7 @@ urlpatterns = [
     
     path('user/<str:username>', UserPostListView.as_view(), name='user-posts'),
     
-    path('create/', PostCreateView.as_view(), name='posteo_nuevo'),
+    path('create/', PostCreateView.as_view(), name='post-create'),
     path('pages/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('pages/', PostDetailView.as_view(), name='home'),
     path('pages/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
