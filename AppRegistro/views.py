@@ -75,3 +75,4 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 class CustomLogoutView(LogoutView):
     template_name = 'AppRegistro/logout.html'
     next_page = reverse_lazy('inicio')
+

@@ -3,14 +3,18 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Post
+from .models import Avatar, Post
 
 
 def inicio(request):
     context = {
-        'posts': Post.objects.all()
+        'posts': Post.objects.all(),
+        'avatares': Avatar.objects.filter(user=request.user.id)
     }
+
+    
     return render(request, "AppTienda/home.html", context)
+
 
 def acerca_de(request):
     return render(request, "AppTienda/acerca_de_mi.html")
@@ -18,14 +22,14 @@ def acerca_de(request):
 
 class PostListView(ListView):
     model = Post
-    template_name = 'AppTienda/home.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'AppTienda/home.html' 
     context_object_name = 'posts'
     ordering = ['date_posted']
     paginate_by = 2
 
 class UserPostListView(ListView):
     model = Post
-    template_name = 'AppTienda/my_post.html'  # <app>/<model>_<viewtype>.html
+    template_name = 'AppTienda/my_post.html'  
     context_object_name = 'posts'
     paginate_by = 2
 
