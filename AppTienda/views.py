@@ -3,13 +3,12 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Avatar, Post
+from .models import Post
 
 
 def inicio(request):
     context = {
         'posts': Post.objects.all(),
-        'avatares': Avatar.objects.filter(user=request.user.id)
     }
 
     

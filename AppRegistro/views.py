@@ -1,15 +1,18 @@
+from audioop import reverse
 from django.shortcuts import render, redirect
 
-from AppRegistro.forms import UserRegisterForm,  UserUpdateForm
+from AppRegistro.forms import UserRegisterForm,  UserUpdateForm, AvatarForm
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LogoutView
 
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from django.contrib.auth.views import LogoutView
+
 
 
 from django.contrib import messages
@@ -61,6 +64,20 @@ def login_request(request):
 
     form = AuthenticationForm()
     return render(request,"AppRegistro/login.html", {'form':form} )
+
+@login_required
+def agregar_avatar(request):
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES)
+        
+        if form.is_valid:   
+            avatar = form.save()
+            avatar.user = request.user
+            avatar.save()
+            return render(request, "AppTienda/home.html", {"mensaje": "avatar cargado :)"})
+
+    form = AvatarForm()
+    return render(request,"AppRegistro/avatar.html", {'form':form} )
 
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):

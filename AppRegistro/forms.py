@@ -1,7 +1,9 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from AppRegistro.models import Avatar
 from captcha.fields import CaptchaField
+
 
 # Lista con los años seleccionables en el registro
 mayor_edad = ['1980', '1981', '1982']
@@ -22,3 +24,8 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name','last_name', 'birth_date' ,'email']
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields =['imagen'] 

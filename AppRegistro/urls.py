@@ -7,4 +7,6 @@ urlpatterns = [
     path('login/', views.login_request, name = 'login'),
     path('logout/', views.CustomLogoutView.as_view(), name = 'logout'),
     path('profile/', views.ProfileUpdateView.as_view(), name="profile"),
+    path('add_avatar/', views.agregar_avatar, name = 'avatar'),
+    
 ]
