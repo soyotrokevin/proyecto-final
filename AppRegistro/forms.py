@@ -1,12 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from AppRegistro.models import Avatar
+from AppRegistro.models import Avatar, Pedidos
 from captcha.fields import CaptchaField
 
 
 # Lista con los años seleccionables en el registro
-mayor_edad = ['1980', '1981', '1982']
+mayor_edad = range(1920, 2010, 1) 
 
 class UserRegisterForm(UserCreationForm):
     password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
@@ -20,10 +20,14 @@ class UserRegisterForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    birth_date = forms.DateField(label='Fecha de nacimiento', widget=forms.SelectDateWidget(years=mayor_edad))
     class Meta:
         model = User
-        fields = ['first_name','last_name', 'birth_date' ,'email']
+        fields = ['first_name','last_name', 'email'] 
+
+class PedidoForm(forms.Form):
+    marca = forms.CharField(max_length=128)
+    modelo = forms.CharField(max_length=128)
+    email = forms.EmailField()
 
 class AvatarForm(forms.ModelForm):
     class Meta:

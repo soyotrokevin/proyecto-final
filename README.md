@@ -1,9 +1,21 @@
+///TIENDA DE MUÑECOS///
+Proyecto Final de Coderhouse de Kevin Hughes
 
 
-instalar requirements
+Instalar requirements
 (pip freeze > requirements.txt)
 
-Créditos y tutoriales utilizados:
+Versión de Django==4.1.1
+
+
+Navegación del sitio:
+admin/   --> admin
+http://127.0.0.1:8000/tienda-muniecos/ --> home del sitio 
+
+
+Créditos, tutoriales utilizados y repositorios que consulté:
+
+https://github.com/smahesh29/Django-Blog
 
 Template utilizado:
 https://startbootstrap.com/theme/clean-blog

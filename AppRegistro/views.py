@@ -1,4 +1,3 @@
-from audioop import reverse
 from django.shortcuts import render, redirect
 
 from AppRegistro.forms import UserRegisterForm,  UserUpdateForm, AvatarForm
@@ -10,15 +9,14 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LogoutView
 
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from AppRegistro.models import Pedidos
+from AppRegistro.forms import PedidoForm
+
+from django.views.generic import  UpdateView
+
+from django.urls import reverse_lazy, reverse
 
 
-
-
-from django.contrib import messages
-from django.urls import reverse_lazy
-
-# Registro Usuario
 
 def register(request):
     mensaje = ''
@@ -66,6 +64,38 @@ def login_request(request):
     return render(request,"AppRegistro/login.html", {'form':form} )
 
 @login_required
+def crear_pedido(request):
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            cliente = Pedidos(**data)
+            cliente.save()
+            return redirect(reverse('pedidos'))
+    else:  # GET
+        form = PedidoForm()  # Formulario vacio para construir el html
+    return render(request, "AppRegistro/order_form.html", {"form": form})
+
+@login_required
+def pedidos(request):
+    pedidos = Pedidos.objects.all() 
+    contexto = {"pedidos": pedidos}
+    borrado = request.GET.get('borrado', None)
+    contexto['borrado'] = borrado
+
+    return render(request, "AppRegistro/order.html", contexto)
+
+@login_required
+def eliminar_pedido(request, id):
+    pedido = Pedidos.objects.get(id=id)
+    borrado_id = pedido.id
+    pedido.delete()
+    url_final = f"{reverse('pedidos')}?borrado={borrado_id}"
+
+    return redirect(url_final)
+
+@login_required
 def agregar_avatar(request):
     if request.method == "POST":
         form = AvatarForm(request.POST, request.FILES)
@@ -85,6 +115,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     form_class = UserUpdateForm
     success_url = reverse_lazy('inicio')
     template_name = 'AppRegistro/perfil.html'
+
 
     def get_object(self, queryset=None):
         return self.request.user

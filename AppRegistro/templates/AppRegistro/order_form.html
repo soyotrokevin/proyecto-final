@@ -4,7 +4,7 @@
 {% load static %}
 
         <!-- Page Header-->
-    <header class="masthead" style="background-image: url('{% static 'AppTienda/assets/img/other-bg.jpg'%}')">
+    <header class="masthead" style="background-image: url('{% static 'AppTienda/assets/img/register-bg.jpg'%}')">
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
@@ -20,14 +20,10 @@
   <div class="container px-4 px-lg-5">
       <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
-            <h4> <small>Agregar avatar: </small> {{ object.username }}</h4>
-
-            <form method="post" enctype="multipart/form-data">
+            <form method="post">
               {% csrf_token %}
-              <fieldset class="form-group">
-                {{ form.as_p }}
-              </fieldset>
-              <p>Tamaño sugerido 400px x 400px</p>
+              {{ form.as_p }}
+
               <div class="form-group">
                   <button class="btn btn-outline-info" type="submit">Guardar
                     
@@ -39,3 +35,4 @@
   </div>
 </main>
 {% endblock contenido_base %}
+              

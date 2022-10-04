@@ -20,19 +20,40 @@
   <div class="container px-4 px-lg-5">
       <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
-            <h4> <small>Hola</small> {{ object.username }}</h4>
 
-            <p>Editar datos:</p>
-            <form method="post">
-              {% csrf_token %}
-              <fieldset class="form-group">
-                {{ form.as_p }}
-              </fieldset>
-              <div class="form-group">
-                  <button class="btn btn-outline-info" type="submit">Guardar
-                    
-                  </button>
-            </form>
+            <h3>Pedidos</h3>
+            <a href="{% url 'crear_pedido' %}"> Agregar pedido </a> 
+            
+            <br><br>
+            
+            <table class="tabla">
+              <tbody>
+                <tr>
+                  <th>
+                    <strong>Marca</strong>
+                  </th>
+                  <th>
+                    <strong>Modelo</strong>
+                  </th>
+                  <th>
+                    <strong>Contacto</strong>
+                  </th>
+
+                </tr>
+                
+                {% for pedido in pedidos %}
+                <tr>
+                  <td><p>{{pedido.modelo}}</p></td>
+                  <td><p>{{pedido.marca}}</p></td>
+                  <td><p>{{pedido.email}}</p></td>
+                  <td><p><a href="{% url 'eliminar_pedido' pedido.id %}">Eliminar</a></p></td>
+
+                </tr>
+                {% endfor %}
+
+                </p>
+              </tbody>
+            </table>
           
           </div>
       </div>
